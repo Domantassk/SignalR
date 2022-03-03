@@ -13,7 +13,7 @@ namespace SignalRAcc.TimeFeatures
         {
             _action = action;
             _autoResetEvent = new AutoResetEvent(false);
-            _timer = new Timer(Execute, _autoResetEvent, 1000, 2000);
+            _timer = new Timer(Execute, _autoResetEvent, 1000, 100);
             TimerStarted = DateTime.Now;
         }
         public void Execute(object stateInfo)

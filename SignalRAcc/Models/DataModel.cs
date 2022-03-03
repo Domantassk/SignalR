@@ -4,11 +4,14 @@ namespace SignalRAcc.Models
 {
     public class DataModel
     {
-        public List<int> Data { get; set; }
-        public string Label { get; set; }
+        public string Name { get; set; }
+        public Queue<float> x { get; set; }
+        public Queue<float> y { get; set; }
+        public string Type { get; set; }
         public DataModel()
         {
-            Data = new List<int>();
+            x = new Queue<float>();
+            y = new Queue<float>();
         }
     }
-}
+} 

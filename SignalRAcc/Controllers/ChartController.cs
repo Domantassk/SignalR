@@ -12,17 +12,19 @@ using SignalRAcc.TimeFeatures;
 namespace SignalRAcc.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ChartController : ControllerBase
     {
         private IHubContext<ChartHub> _hub;
+        
         public ChartController(IHubContext<ChartHub> hub)
         {
             _hub = hub;
         }
+
         public IActionResult Get()
         {
-            var timerManager = new TimerManager(() => _hub.Clients.All.SendAsync("transferchartdata", DataManager.GetData()));
+            var timerManager = new TimerManager(() => _hub.Clients.All.SendAsync("transferchartdata", Program.data.GetData()));  //then 2 clients connected it's sends data 2 times faster :/
             return Ok(new { Message = "Request Completed" });
         }
         

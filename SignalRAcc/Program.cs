@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SignalRAcc.DataStorage;
 
 namespace SignalRAcc
 {
+    
     public class Program
     {
+        public static Boolean isItMeasuring = false;
+        public static DataManager data = new DataManager();
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
