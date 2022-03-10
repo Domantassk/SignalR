@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using SignalRAcc.Models;
@@ -32,8 +33,10 @@ namespace SignalRAcc.DataStorage
 
 
         }
-        public List<DataModel> GetData()
+        public static List<DataModel> GetData(List<DataModel> data)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             var dataForReturn = new List<DataModel>{
                         new DataModel {x = new Queue<float> {}, y = new Queue<float> {}, Name = "Accelerometer 1", Type="line"},
                         new DataModel {x = new Queue<float> {}, y = new Queue<float> {}, Name = "Accelerometer 2", Type="line"},
@@ -41,24 +44,27 @@ namespace SignalRAcc.DataStorage
             };
             try
             {
-                dataForReturn[0].y.Enqueue(Data[0].y.Dequeue());
-                dataForReturn[1].y.Enqueue(Data[1].y.Dequeue());
-                dataForReturn[2].y.Enqueue(Data[2].y.Dequeue());
+                dataForReturn[0].y.Enqueue(data[0].y.Dequeue());
+                dataForReturn[1].y.Enqueue(data[1].y.Dequeue());
+                dataForReturn[2].y.Enqueue(data[2].y.Dequeue());
 
-                dataForReturn[0].x.Enqueue(Data[0].x.Dequeue());
-                dataForReturn[1].x.Enqueue(Data[1].x.Dequeue());
-                dataForReturn[2].x.Enqueue(Data[2].x.Dequeue());
+                dataForReturn[0].x.Enqueue(data[0].x.Dequeue());
+                dataForReturn[1].x.Enqueue(data[1].x.Dequeue());
+                dataForReturn[2].x.Enqueue(data[2].x.Dequeue());
             }
             catch (System.Exception)
             {
                 //swallow
             }
-            
+
             /*
             for (int i = 0; i < 1333; i++)
             {
                 
             }*/
+            stopwatch.Stop();
+            Console.WriteLine("GetData funkcijos vykdymo trukme: {0} ms", stopwatch.Elapsed);
+
 
             return dataForReturn;
         }
@@ -100,6 +106,8 @@ namespace SignalRAcc.DataStorage
         }
         private List<DataModel> CalculatePoints(int startRange, int stopRange, List<DataModel> data)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             for (int i = startRange; i < stopRange; i++)
             {
                 float sineY = (float)GetSin(i) * (-1);
@@ -114,7 +122,8 @@ namespace SignalRAcc.DataStorage
                 data[2].x.Enqueue(i);
 
             }
-
+            stopwatch.Stop();
+            Console.WriteLine("CalculatePont funkcijos vykdymo trukme: {0}", stopwatch.Elapsed);
             return data;
         }
     }

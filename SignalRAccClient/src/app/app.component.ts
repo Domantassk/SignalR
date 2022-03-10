@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { ChartDataset, ChartOptions } from 'chart.js';
 import { SignalRService } from './services/signal-r.service';
 
 @Component({
@@ -9,9 +9,13 @@ import { SignalRService } from './services/signal-r.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+ 
+  
 
   constructor(public signalRService: SignalRService, private http: HttpClient) { }
   
+  
+
   ngOnInit() {
     this.signalRService.startConnection();
     this.signalRService.addTransferChartDataListener();

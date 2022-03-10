@@ -14,7 +14,8 @@ namespace SignalRAcc
     public class Program
     {
         public static Boolean isItMeasuring = false;
-        public static DataManager data = new DataManager();
+        public static DataManager data;
+        
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

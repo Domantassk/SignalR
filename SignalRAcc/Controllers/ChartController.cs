@@ -24,7 +24,7 @@ namespace SignalRAcc.Controllers
 
         public IActionResult Get()
         {
-            var timerManager = new TimerManager(() => _hub.Clients.All.SendAsync("transferchartdata", Program.data.GetData()));  //then 2 clients connected it's sends data 2 times faster :/
+            var timerManager = new TimerManager(() => _hub.Clients.All.SendAsync("transferchartdata", DataManager.GetData(Program.data.Data)));  //then 2 clients connected it's sends data 2 times faster :/
             return Ok(new { Message = "Request Completed" });
         }
         
