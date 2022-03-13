@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions } from 'chart.js';
+import { ApexAxisChartSeries, ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
 import { SignalRService } from './services/signal-r.service';
 
 @Component({
@@ -9,7 +10,6 @@ import { SignalRService } from './services/signal-r.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
- 
   
 
   constructor(public signalRService: SignalRService, private http: HttpClient) { }

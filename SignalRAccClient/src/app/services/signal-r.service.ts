@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import * as signalR from "@aspnet/signalr"; 
 import { ChartConfiguration } from 'chart.js';
+import { ApexAxisChartSeries, ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
 import { Observable, of } from 'rxjs';
 import { DataModel } from '../interfaces/data-model';
 import { TotalResult } from '../interfaces/total-result';
@@ -11,6 +12,13 @@ import { TotalResult } from '../interfaces/total-result';
 export class SignalRService {
   public data: DataModel[] = [];
   public chartLabels!: number[];
+  @Input() series: ApexAxisChartSeries | ApexNonAxisChartSeries = [
+    {
+        name: "My-series",
+        data: [0, 3,6,3,2,1,6,8,8,55,4,3,55,0,12,43,23]
+    }];
+  @Input() chart: ApexChart = {height: 350, type: "line" };
+  @Input() title: ApexTitleSubtitle = {text: "accelerometer"};
   
   public graph = {
     data: [
@@ -20,13 +28,10 @@ export class SignalRService {
     ]
   };
 
-  public graph2 = {
-    data: [
-        { x: [0], y: [0], type: '', mode: '', name: '', length: 1},
-        { x: [0], y: [0], type: '', mode: '', name: ''},
-        { x: [0], y: [0], type: '', mode: '', name: ''}
-    ]
-  };
+  public testas = {
+    name: "testas",
+    data: [0]
+  }
 
   private hubConnection!: signalR.HubConnection;
 
@@ -64,15 +69,8 @@ export class SignalRService {
       this.graph.data[2].type = data[2].type;
       this.graph.data[2].mode = 'lines+points';
 
-      
-      this.graph2 = {
-        data: [
-            { x: this.graph.data[0].x, y: this.graph.data[0].y, type: this.graph.data[0].type, mode: this.graph.data[0].mode, name:  this.graph.data[0].name, length: this.graph.data[0].x.length},
-            { x: [0], y: [0], type: '', mode: '', name: ''},
-            { x: [0], y: [0], type: '', mode: '', name: ''}
-        ]
-      };
-      console.log(this.graph2);
+      this.testas.data.push(this.graph.data[0].x)
+      this.series.push(this.graph.data[0].x);
     });
   }
 

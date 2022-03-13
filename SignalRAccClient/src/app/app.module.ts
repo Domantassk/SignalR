@@ -14,6 +14,8 @@ import { PlotlyModule } from 'angular-plotly.js';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -31,7 +33,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatProgressBarModule,
     MatButtonModule,
     MatGridListModule,
-    
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
